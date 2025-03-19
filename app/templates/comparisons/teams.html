@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Compare Teams - Formula 1 Database{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="f1-red">Compare Teams</h1>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="/teams" class="btn btn-secondary">Back to Teams</a>
+    </div>
+</div>
+
+{% if error %}
+<div class="alert alert-danger">
+    {{ error }}
+</div>
+{% endif %}
+
+<div class="card">
+    <div class="card-header f1-bg-red">
+        <h3 class="card-title mb-0">Select Teams to Compare</h3>
+    </div>
+    <div class="card-body">
+        <form method="post" action="/comparisons/teams">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="team1_id" class="form-label">Team 1</label>
+                        <select class="form-select" id="team1_id" name="team1_id" required>
+                            <option value="">Select a team</option>
+                            {% for team in teams %}
+                            <option value="{{ team.id }}">{{ team.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="team2_id" class="form-label">Team 2</label>
+                        <select class="form-select" id="team2_id" name="team2_id" required>
+                            <option value="">Select a team</option>
+                            {% for team in teams %}
+                            <option value="{{ team.id }}">{{ team.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-danger">Compare Teams</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header f1-bg-red">
+                <h3 class="card-title mb-0">About Team Comparisons</h3>
+            </div>
+            <div class="card-body">
+                <p>Compare two Formula 1 teams side by side to see how they stack up against each other. The comparison will highlight the better statistic in green for each category.</p>
+                <p>For most statistics, a higher number is better (pole positions, race wins, constructor titles). For year founded and finishing position in the previous season, a lower number is considered better.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

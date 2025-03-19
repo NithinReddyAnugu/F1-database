@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}{{ driver.name }} - Formula 1 Database{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="f1-red">{{ driver.name }}</h1>
+    </div>
+    <div class="col-md-4 text-end">
+        <div class="btn-group auth-required" style="display: none;">
+            <a href="/drivers/{{ driver.id }}/edit" class="btn btn-warning">Edit</a>
+            <a href="/drivers/{{ driver.id }}/delete" class="btn btn-danger">Delete</a>
+        </div>
+        <a href="/drivers" class="btn btn-secondary">Back to Drivers</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header f1-bg-red">
+                <h3 class="card-title mb-0">Driver Information</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table">
+                            <tr>
+                                <th>Name:</th>
+                                <td>{{ driver.name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Age:</th>
+                                <td>{{ driver.age }}</td>
+                            </tr>
+                            <tr>
+                                <th>Team:</th>
+                                <td>{{ driver.team }}</td>
+                            </tr>
+                            <tr>
+                                <th>Total Pole Positions:</th>
+                                <td>{{ driver.total_pole_positions }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table">
+                            <tr>
+                                <th>Total Race Wins:</th>
+                                <td>{{ driver.total_race_wins }}</td>
+                            </tr>
+                            <tr>
+                                <th>Total Points Scored:</th>
+                                <td>{{ driver.total_points_scored }}</td>
+                            </tr>
+                            <tr>
+                                <th>Total World Titles:</th>
+                                <td>{{ driver.total_world_titles }}</td>
+                            </tr>
+                            <tr>
+                                <th>Total Fastest Laps:</th>
+                                <td>{{ driver.total_fastest_laps }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header f1-bg-red">
+                <h3 class="card-title mb-0">Driver Options</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-2">
+                        <a href="/comparisons/drivers" class="btn btn-outline-secondary w-100">Compare with Another Driver</a>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <a href="/queries/drivers" class="btn btn-outline-secondary w-100">Query Drivers</a>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <a href="/teams" class="btn btn-outline-danger w-100">View Teams</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

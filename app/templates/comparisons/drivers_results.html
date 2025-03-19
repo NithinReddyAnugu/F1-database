@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Driver Comparison - Formula 1 Database{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="f1-red">Driver Comparison</h1>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="/comparisons/drivers" class="btn btn-secondary">New Comparison</a>
+        <a href="/drivers" class="btn btn-secondary">Back to Drivers</a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header f1-bg-red">
+        <h3 class="card-title mb-0">{{ driver1.name }} vs. {{ driver2.name }}</h3>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Attribute</th>
+                        <th>{{ driver1.name }}</th>
+                        <th>{{ driver2.name }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Team</th>
+                        <td>{{ driver1.team }}</td>
+                        <td>{{ driver2.team }}</td>
+                    </tr>
+                    <tr>
+                        <th>Age</th>
+                        <td class="{{ 'better-stat' if comparison.age == 'driver1' }}">{{ driver1.age }}</td>
+                        <td class="{{ 'better-stat' if comparison.age == 'driver2' }}">{{ driver2.age }}</td>
+                    </tr>
+                    <tr>
+                        <th>Total Pole Positions</th>
+                        <td class="{{ 'better-stat' if comparison.total_pole_positions == 'driver1' }}">{{ driver1.total_pole_positions }}</td>
+                        <td class="{{ 'better-stat' if comparison.total_pole_positions == 'driver2' }}">{{ driver2.total_pole_positions }}</td>
+                    </tr>
+                    <tr>
+                        <th>Total Race Wins</th>
+                        <td class="{{ 'better-stat' if comparison.total_race_wins == 'driver1' }}">{{ driver1.total_race_wins }}</td>
+                        <td class="{{ 'better-stat' if comparison.total_race_wins == 'driver2' }}">{{ driver2.total_race_wins }}</td>
+                    </tr>
+                    <tr>
+                        <th>Total Points Scored</th>
+                        <td class="{{ 'better-stat' if comparison.total_points_scored == 'driver1' }}">{{ driver1.total_points_scored }}</td>
+                        <td class="{{ 'better-stat' if comparison.total_points_scored == 'driver2' }}">{{ driver2.total_points_scored }}</td>
+                    </tr>
+                    <tr>
+                        <th>Total World Titles</th>
+                        <td class="{{ 'better-stat' if comparison.total_world_titles == 'driver1' }}">{{ driver1.total_world_titles }}</td>
+                        <td class="{{ 'better-stat' if comparison.total_world_titles == 'driver2' }}">{{ driver2.total_world_titles }}</td>
+                    </tr>
+                    <tr>
+                        <th>Total Fastest Laps</th>
+                        <td class="{{ 'better-stat' if comparison.total_fastest_laps == 'driver1' }}">{{ driver1.total_fastest_laps }}</td>
+                        <td class="{{ 'better-stat' if comparison.total_fastest_laps == 'driver2' }}">{{ driver2.total_fastest_laps }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header f1-bg-red">
+                <h3 class="card-title mb-0">{{ driver1.name }}</h3>
+            </div>
+            <div class="card-body">
+                <a href="/drivers/{{ driver1.id }}" class="btn btn-outline-danger w-100">View Driver Details</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header f1-bg-red">
+                <h3 class="card-title mb-0">{{ driver2.name }}</h3>
+            </div>
+            <div class="card-body">
+                <a href="/drivers/{{ driver2.id }}" class="btn btn-outline-danger w-100">View Driver Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Edit {{ driver.name }} - Formula 1 Database{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="f1-red">Edit Driver: {{ driver.name }}</h1>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="/drivers/{{ driver.id }}" class="btn btn-secondary">Back to Driver</a>
+    </div>
+</div>
+
+{% if error %}
+<div class="alert alert-danger">
+    {{ error }}
+</div>
+{% endif %}
+
+<div class="card">
+    <div class="card-header f1-bg-red">
+        <h3 class="card-title mb-0">Driver Information</h3>
+    </div>
+    <div class="card-body">
+        <form method="post" action="/drivers/{{ driver.id }}/edit">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" value="{{ driver.name }}" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="age" class="form-label">Age</label>
+                        <input type="number" class="form-control" id="age" name="age" value="{{ driver.age }}" min="1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="team" class="form-label">Team</label>
+                        <select class="form-select" id="team" name="team" required>
+                            <option value="">Select a team</option>
+                            {% for team in teams %}
+                            <option value="{{ team.name }}" {% if driver.team == team.name %}selected{% endif %}>{{ team.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="total_pole_positions" class="form-label">Total Pole Positions</label>
+                        <input type="number" class="form-control" id="total_pole_positions" name="total_pole_positions" value="{{ driver.total_pole_positions }}" min="0" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="total_race_wins" class="form-label">Total Race Wins</label>
+                        <input type="number" class="form-control" id="total_race_wins" name="total_race_wins" value="{{ driver.total_race_wins }}" min="0" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="total_points_scored" class="form-label">Total Points Scored</label>
+                        <input type="number" class="form-control" id="total_points_scored" name="total_points_scored" value="{{ driver.total_points_scored }}" min="0" step="0.1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="total_world_titles" class="form-label">Total World Titles</label>
+                        <input type="number" class="form-control" id="total_world_titles" name="total_world_titles" value="{{ driver.total_world_titles }}" min="0" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="total_fastest_laps" class="form-label">Total Fastest Laps</label>
+                        <input type="number" class="form-control" id="total_fastest_laps" name="total_fastest_laps" value="{{ driver.total_fastest_laps }}" min="0" required>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-warning">Update Driver</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Check if user is logged in
+    document.addEventListener('DOMContentLoaded', function() {
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (!user) {
+                // Redirect to login if not logged in
+                window.location.href = '/login';
+            }
+        });
+    });
+</script>
+{% endblock %} 

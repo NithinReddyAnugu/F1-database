@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Edit {{ team.name }} - Formula 1 Database{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="f1-red">Edit Team: {{ team.name }}</h1>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="/teams/{{ team.id }}" class="btn btn-secondary">Back to Team</a>
+    </div>
+</div>
+
+{% if error %}
+<div class="alert alert-danger">
+    {{ error }}
+</div>
+{% endif %}
+
+<div class="card">
+    <div class="card-header f1-bg-red">
+        <h3 class="card-title mb-0">Team Information</h3>
+    </div>
+    <div class="card-body">
+        <form method="post" action="/teams/{{ team.id }}/edit">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" value="{{ team.name }}" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="year_founded" class="form-label">Year Founded</label>
+                        <input type="number" class="form-control" id="year_founded" name="year_founded" value="{{ team.year_founded }}" min="1900" max="2099" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="total_pole_positions" class="form-label">Total Pole Positions</label>
+                        <input type="number" class="form-control" id="total_pole_positions" name="total_pole_positions" value="{{ team.total_pole_positions }}" min="0" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="total_race_wins" class="form-label">Total Race Wins</label>
+                        <input type="number" class="form-control" id="total_race_wins" name="total_race_wins" value="{{ team.total_race_wins }}" min="0" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="total_constructor_titles" class="form-label">Total Constructor Titles</label>
+                        <input type="number" class="form-control" id="total_constructor_titles" name="total_constructor_titles" value="{{ team.total_constructor_titles }}" min="0" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="finishing_position_previous_season" class="form-label">Finishing Position in Previous Season</label>
+                        <input type="number" class="form-control" id="finishing_position_previous_season" name="finishing_position_previous_season" value="{{ team.finishing_position_previous_season }}" min="1" required>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-warning">Update Team</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Check if user is logged in
+    document.addEventListener('DOMContentLoaded', function() {
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (!user) {
+                // Redirect to login if not logged in
+                window.location.href = '/login';
+            }
+        });
+    });
+</script>
+{% endblock %} 

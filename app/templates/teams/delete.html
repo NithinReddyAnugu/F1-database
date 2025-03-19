@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Delete {{ team.name }} - Formula 1 Database{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="f1-red">Delete Team: {{ team.name }}</h1>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="/teams/{{ team.id }}" class="btn btn-secondary">Back to Team</a>
+    </div>
+</div>
+
+{% if error %}
+<div class="alert alert-danger">
+    {{ error }}
+</div>
+{% endif %}
+
+<div class="card">
+    <div class="card-header bg-danger text-white">
+        <h3 class="card-title mb-0">Confirm Deletion</h3>
+    </div>
+    <div class="card-body">
+        {% if has_drivers %}
+        <div class="alert alert-danger">
+            <h4 class="alert-heading">Cannot Delete Team!</h4>
+            <p>This team has drivers associated with it. You must reassign or delete these drivers before deleting the team.</p>
+            <hr>
+            <p class="mb-0">Please go back to the <a href="/teams/{{ team.id }}">team page</a> to see the list of drivers.</p>
+        </div>
+        {% else %}
+        <div class="alert alert-warning">
+            <h4 class="alert-heading">Warning!</h4>
+            <p>Are you sure you want to delete the team <strong>{{ team.name }}</strong>? This action cannot be undone.</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Team Information:</h5>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item"><strong>Name:</strong> {{ team.name }}</li>
+                    <li class="list-group-item"><strong>Year Founded:</strong> {{ team.year_founded }}</li>
+                    <li class="list-group-item"><strong>Total Race Wins:</strong> {{ team.total_race_wins }}</li>
+                    <li class="list-group-item"><strong>Total Constructor Titles:</strong> {{ team.total_constructor_titles }}</li>
+                </ul>
+            </div>
+        </div>
+        
+        <form method="post" action="/teams/{{ team.id }}/delete">
+            <div class="d-flex justify-content-between">
+                <a href="/teams/{{ team.id }}" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-danger">Delete Team</button>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Check if user is logged in
+    document.addEventListener('DOMContentLoaded', function() {
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (!user) {
+                // Redirect to login if not logged in
+                window.location.href = '/login';
+            }
+        });
+    });
+</script>
+{% endblock %} 

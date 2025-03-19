@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Drivers - Formula 1 Database{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="f1-red">Formula 1 Drivers</h1>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="/drivers/add" class="btn btn-danger auth-required" style="display: none;">Add Driver</a>
+    </div>
+</div>
+
+{% if drivers %}
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Team</th>
+                <th>Race Wins</th>
+                <th>World Titles</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for driver in drivers %}
+            <tr>
+                <td><a href="/drivers/{{ driver.id }}">{{ driver.name }}</a></td>
+                <td>{{ driver.age }}</td>
+                <td>{{ driver.team }}</td>
+                <td>{{ driver.total_race_wins }}</td>
+                <td>{{ driver.total_world_titles }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="alert alert-info">
+    No drivers found. {% if not user %}<a href="/login">Login</a> to add drivers.{% endif %}
+</div>
+{% endif %}
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header f1-bg-red">
+                <h3 class="card-title mb-0">Driver Options</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-2">
+                        <a href="/queries/drivers" class="btn btn-outline-secondary w-100">Query Drivers</a>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <a href="/comparisons/drivers" class="btn btn-outline-secondary w-100">Compare Drivers</a>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <a href="/teams" class="btn btn-outline-danger w-100">View Teams</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Team Query Results - Formula 1 Database{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="f1-red">Team Query Results</h1>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="/queries/teams" class="btn btn-secondary">New Query</a>
+        <a href="/teams" class="btn btn-secondary">Back to Teams</a>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header f1-bg-red">
+        <h3 class="card-title mb-0">Query Parameters</h3>
+    </div>
+    <div class="card-body">
+        <p><strong>Attribute:</strong> {{ attribute }}</p>
+        <p><strong>Operator:</strong> {{ operator }}</p>
+        <p><strong>Value:</strong> {{ value }}</p>
+    </div>
+</div>
+
+{% if teams %}
+<div class="card">
+    <div class="card-header f1-bg-red">
+        <h3 class="card-title mb-0">Results ({{ teams|length }} teams found)</h3>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Year Founded</th>
+                        <th>Race Wins</th>
+                        <th>Constructor Titles</th>
+                        <th>Previous Season Position</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for team in teams %}
+                    <tr>
+                        <td>{{ team.name }}</td>
+                        <td>{{ team.year_founded }}</td>
+                        <td>{{ team.total_race_wins }}</td>
+                        <td>{{ team.total_constructor_titles }}</td>
+                        <td>{{ team.finishing_position_previous_season }}</td>
+                        <td>
+                            <a href="/teams/{{ team.id }}" class="btn btn-sm btn-outline-primary">View</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-info">
+    No teams found matching the query criteria.
+</div>
+{% endif %}
+{% endblock %} 

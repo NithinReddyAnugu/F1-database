@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Delete {{ driver.name }} - Formula 1 Database{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="f1-red">Delete Driver: {{ driver.name }}</h1>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="/drivers/{{ driver.id }}" class="btn btn-secondary">Back to Driver</a>
+    </div>
+</div>
+
+{% if error %}
+<div class="alert alert-danger">
+    {{ error }}
+</div>
+{% endif %}
+
+<div class="card">
+    <div class="card-header bg-danger text-white">
+        <h3 class="card-title mb-0">Confirm Deletion</h3>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-warning">
+            <h4 class="alert-heading">Warning!</h4>
+            <p>Are you sure you want to delete the driver <strong>{{ driver.name }}</strong>? This action cannot be undone.</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Driver Information:</h5>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item"><strong>Name:</strong> {{ driver.name }}</li>
+                    <li class="list-group-item"><strong>Age:</strong> {{ driver.age }}</li>
+                    <li class="list-group-item"><strong>Team:</strong> {{ driver.team }}</li>
+                    <li class="list-group-item"><strong>Total Race Wins:</strong> {{ driver.total_race_wins }}</li>
+                    <li class="list-group-item"><strong>Total World Titles:</strong> {{ driver.total_world_titles }}</li>
+                </ul>
+            </div>
+        </div>
+        
+        <form method="post" action="/drivers/{{ driver.id }}/delete">
+            <div class="d-flex justify-content-between">
+                <a href="/drivers/{{ driver.id }}" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-danger">Delete Driver</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Check if user is logged in
+    document.addEventListener('DOMContentLoaded', function() {
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (!user) {
+                // Redirect to login if not logged in
+                window.location.href = '/login';
+            }
+        });
+    });
+</script>
+{% endblock %} 

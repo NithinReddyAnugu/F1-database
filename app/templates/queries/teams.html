@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Query Teams - Formula 1 Database{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="f1-red">Query Teams</h1>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="/teams" class="btn btn-secondary">Back to Teams</a>
+    </div>
+</div>
+
+{% if error %}
+<div class="alert alert-danger">
+    {{ error }}
+</div>
+{% endif %}
+
+<div class="card">
+    <div class="card-header f1-bg-red">
+        <h3 class="card-title mb-0">Query Parameters</h3>
+    </div>
+    <div class="card-body">
+        <form method="post" action="/queries/teams">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="attribute" class="form-label">Attribute</label>
+                        <select class="form-select" id="attribute" name="attribute" required>
+                            <option value="">Select an attribute</option>
+                            {% for key, value in attributes.items() %}
+                            <option value="{{ key }}">{{ value }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="operator" class="form-label">Operator</label>
+                        <select class="form-select" id="operator" name="operator" required>
+                            <option value="">Select an operator</option>
+                            {% for key, value in operators.items() %}
+                            <option value="{{ key }}">{{ value }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="value" class="form-label">Value</label>
+                        <input type="text" class="form-control" id="value" name="value" required>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-danger">Run Query</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header f1-bg-red">
+                <h3 class="card-title mb-0">Query Examples</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Find historic teams</h5>
+                                <p class="card-text">Attribute: Year Founded<br>Operator: Less Than<br>Value: 1970</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Find successful teams</h5>
+                                <p class="card-text">Attribute: Total Constructor Titles<br>Operator: Greater Than<br>Value: 0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Find top teams from last season</h5>
+                                <p class="card-text">Attribute: Finishing Position Previous Season<br>Operator: Less Than<br>Value: 4</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

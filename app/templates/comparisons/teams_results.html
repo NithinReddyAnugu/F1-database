@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Team Comparison - Formula 1 Database{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="f1-red">Team Comparison</h1>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="/comparisons/teams" class="btn btn-secondary">New Comparison</a>
+        <a href="/teams" class="btn btn-secondary">Back to Teams</a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header f1-bg-red">
+        <h3 class="card-title mb-0">{{ team1.name }} vs. {{ team2.name }}</h3>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Attribute</th>
+                        <th>{{ team1.name }}</th>
+                        <th>{{ team2.name }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Year Founded</th>
+                        <td class="{{ 'better-stat' if comparison.year_founded == 'team1' }}">{{ team1.year_founded }}</td>
+                        <td class="{{ 'better-stat' if comparison.year_founded == 'team2' }}">{{ team2.year_founded }}</td>
+                    </tr>
+                    <tr>
+                        <th>Total Pole Positions</th>
+                        <td class="{{ 'better-stat' if comparison.total_pole_positions == 'team1' }}">{{ team1.total_pole_positions }}</td>
+                        <td class="{{ 'better-stat' if comparison.total_pole_positions == 'team2' }}">{{ team2.total_pole_positions }}</td>
+                    </tr>
+                    <tr>
+                        <th>Total Race Wins</th>
+                        <td class="{{ 'better-stat' if comparison.total_race_wins == 'team1' }}">{{ team1.total_race_wins }}</td>
+                        <td class="{{ 'better-stat' if comparison.total_race_wins == 'team2' }}">{{ team2.total_race_wins }}</td>
+                    </tr>
+                    <tr>
+                        <th>Total Constructor Titles</th>
+                        <td class="{{ 'better-stat' if comparison.total_constructor_titles == 'team1' }}">{{ team1.total_constructor_titles }}</td>
+                        <td class="{{ 'better-stat' if comparison.total_constructor_titles == 'team2' }}">{{ team2.total_constructor_titles }}</td>
+                    </tr>
+                    <tr>
+                        <th>Finishing Position in Previous Season</th>
+                        <td class="{{ 'better-stat' if comparison.finishing_position_previous_season == 'team1' }}">{{ team1.finishing_position_previous_season }}</td>
+                        <td class="{{ 'better-stat' if comparison.finishing_position_previous_season == 'team2' }}">{{ team2.finishing_position_previous_season }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header f1-bg-red">
+                <h3 class="card-title mb-0">{{ team1.name }}</h3>
+            </div>
+            <div class="card-body">
+                <a href="/teams/{{ team1.id }}" class="btn btn-outline-danger w-100">View Team Details</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header f1-bg-red">
+                <h3 class="card-title mb-0">{{ team2.name }}</h3>
+            </div>
+            <div class="card-body">
+                <a href="/teams/{{ team2.id }}" class="btn btn-outline-danger w-100">View Team Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

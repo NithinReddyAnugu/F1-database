@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}{{ team.name }} - Formula 1 Database{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="f1-red">{{ team.name }}</h1>
+    </div>
+    <div class="col-md-4 text-end">
+        <div class="btn-group auth-required" style="display: none;">
+            <a href="/teams/{{ team.id }}/edit" class="btn btn-warning">Edit</a>
+            <a href="/teams/{{ team.id }}/delete" class="btn btn-danger">Delete</a>
+        </div>
+        <a href="/teams" class="btn btn-secondary">Back to Teams</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header f1-bg-red">
+                <h3 class="card-title mb-0">Team Information</h3>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <tr>
+                        <th>Name:</th>
+                        <td>{{ team.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Year Founded:</th>
+                        <td>{{ team.year_founded }}</td>
+                    </tr>
+                    <tr>
+                        <th>Total Pole Positions:</th>
+                        <td>{{ team.total_pole_positions }}</td>
+                    </tr>
+                    <tr>
+                        <th>Total Race Wins:</th>
+                        <td>{{ team.total_race_wins }}</td>
+                    </tr>
+                    <tr>
+                        <th>Total Constructor Titles:</th>
+                        <td>{{ team.total_constructor_titles }}</td>
+                    </tr>
+                    <tr>
+                        <th>Finishing Position in Previous Season:</th>
+                        <td>{{ team.finishing_position_previous_season }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header f1-bg-red">
+                <h3 class="card-title mb-0">Team Drivers</h3>
+            </div>
+            <div class="card-body">
+                {% if drivers %}
+                <div class="list-group">
+                    {% for driver in drivers %}
+                    <a href="/drivers/{{ driver.id }}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{ driver.name }}</h5>
+                            <small>Age: {{ driver.age }}</small>
+                        </div>
+                        <p class="mb-1">
+                            Race Wins: {{ driver.total_race_wins }} | 
+                            World Titles: {{ driver.total_world_titles }}
+                        </p>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    No drivers found for this team.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header f1-bg-red">
+                <h3 class="card-title mb-0">Team Options</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-2">
+                        <a href="/comparisons/teams" class="btn btn-outline-secondary w-100">Compare with Another Team</a>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <a href="/queries/teams" class="btn btn-outline-secondary w-100">Query Teams</a>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <a href="/drivers" class="btn btn-outline-danger w-100">View Drivers</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

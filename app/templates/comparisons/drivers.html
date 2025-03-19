@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Compare Drivers - Formula 1 Database{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="f1-red">Compare Drivers</h1>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="/drivers" class="btn btn-secondary">Back to Drivers</a>
+    </div>
+</div>
+
+{% if error %}
+<div class="alert alert-danger">
+    {{ error }}
+</div>
+{% endif %}
+
+<div class="card">
+    <div class="card-header f1-bg-red">
+        <h3 class="card-title mb-0">Select Drivers to Compare</h3>
+    </div>
+    <div class="card-body">
+        <form method="post" action="/comparisons/drivers">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="driver1_id" class="form-label">Driver 1</label>
+                        <select class="form-select" id="driver1_id" name="driver1_id" required>
+                            <option value="">Select a driver</option>
+                            {% for driver in drivers %}
+                            <option value="{{ driver.id }}">{{ driver.name }} ({{ driver.team }})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="driver2_id" class="form-label">Driver 2</label>
+                        <select class="form-select" id="driver2_id" name="driver2_id" required>
+                            <option value="">Select a driver</option>
+                            {% for driver in drivers %}
+                            <option value="{{ driver.id }}">{{ driver.name }} ({{ driver.team }})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-danger">Compare Drivers</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header f1-bg-red">
+                <h3 class="card-title mb-0">About Driver Comparisons</h3>
+            </div>
+            <div class="card-body">
+                <p>Compare two Formula 1 drivers side by side to see how they stack up against each other. The comparison will highlight the better statistic in green for each category.</p>
+                <p>For most statistics, a higher number is better (pole positions, race wins, points, world titles, fastest laps). For age, a lower number is considered better.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
