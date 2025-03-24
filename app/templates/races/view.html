@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}{{ race.name }} - F1 Database{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>{{ race.name }}</h1>
+        <div>
+            <a href="/races" class="btn btn-secondary">Back to Races</a>
+            <a href="/races/delete/{{ race.id }}" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Race Details</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>Circuit:</strong> {{ race.circuit }}</p>
+                    <p><strong>Date:</strong> {{ race.date_str }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0">Results</h3>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Position</th>
+                                <th>Driver</th>
+                                <th>Points</th>
+                                <th>Fastest Lap</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for result in race.results %}
+                            <tr>
+                                <td>{{ result.position }}</td>
+                                <td>{{ result.driver }}</td>
+                                <td>{{ result.points }}</td>
+                                <td>
+                                    {% if result.fastest_lap %}
+                                    <span class="badge bg-info">Yes</span>
+                                    {% else %}
+                                    -
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Races - F1 Database{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>F1 Races</h1>
+        <a href="/races/add" class="btn btn-primary">Add New Race</a>
+    </div>
+
+    {% if races %}
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Circuit</th>
+                    <th>Date</th>
+                    <th>Winner</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for race in races %}
+                <tr>
+                    <td>{{ race.name }}</td>
+                    <td>{{ race.circuit }}</td>
+                    <td>{{ race.date_str }}</td>
+                    <td>
+                        {% for result in race.results %}
+                            {% if result.position == 1 %}
+                                {{ result.driver }}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="/races/{{ race.id }}" class="btn btn-sm btn-info">View</a>
+                        <a href="/races/delete/{{ race.id }}" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-info">
+        <p>No races found. Add a new race to get started.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %} 

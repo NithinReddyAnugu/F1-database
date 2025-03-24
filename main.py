@@ -28,7 +28,7 @@ app.mount("/static", StaticFiles(directory="app/static"), name="static")
 templates = Jinja2Templates(directory="app/templates")
 
 # Import routes
-from app.routes import auth, drivers, teams, queries, comparisons
+from app.routes import auth, drivers, teams, queries, comparisons, races, seasons
 
 # Include routers
 app.include_router(auth.router)
@@ -36,6 +36,8 @@ app.include_router(drivers.router)
 app.include_router(teams.router)
 app.include_router(queries.router)
 app.include_router(comparisons.router)
+app.include_router(races.router)
+app.include_router(seasons.router)
 
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):

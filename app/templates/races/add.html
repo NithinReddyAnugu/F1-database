@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Add Race - F1 Database{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Add New Race</h1>
+    
+    {% if error %}
+    <div class="alert alert-danger">
+        {{ error }}
+    </div>
+    {% endif %}
+    
+    <form method="post" action="/races/add">
+        <div class="mb-3">
+            <label for="name" class="form-label">Race Name</label>
+            <input type="text" class="form-control" id="name" name="name" required value="{{ name or '' }}">
+        </div>
+        
+        <div class="mb-3">
+            <label for="circuit" class="form-label">Circuit</label>
+            <input type="text" class="form-control" id="circuit" name="circuit" required value="{{ circuit or '' }}">
+        </div>
+        
+        <div class="mb-3">
+            <label for="date" class="form-label">Date</label>
+            <input type="date" class="form-control" id="date" name="date" required value="{{ date or '' }}">
+        </div>
+        
+        <div class="mb-3">
+            <label for="winner_id" class="form-label">Winner (P1)</label>
+            <select class="form-select" id="winner_id" name="winner_id" required>
+                <option value="">Select Driver</option>
+                {% for driver in drivers %}
+                <option value="{{ driver.id }}">{{ driver.name }} ({{ driver.team }})</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="mb-3">
+            <label for="second_id" class="form-label">Second Place (P2)</label>
+            <select class="form-select" id="second_id" name="second_id" required>
+                <option value="">Select Driver</option>
+                {% for driver in drivers %}
+                <option value="{{ driver.id }}">{{ driver.name }} ({{ driver.team }})</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="mb-3">
+            <label for="third_id" class="form-label">Third Place (P3)</label>
+            <select class="form-select" id="third_id" name="third_id" required>
+                <option value="">Select Driver</option>
+                {% for driver in drivers %}
+                <option value="{{ driver.id }}">{{ driver.name }} ({{ driver.team }})</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="mb-3">
+            <label for="fastest_lap_id" class="form-label">Fastest Lap</label>
+            <select class="form-select" id="fastest_lap_id" name="fastest_lap_id" required>
+                <option value="">Select Driver</option>
+                {% for driver in drivers %}
+                <option value="{{ driver.id }}">{{ driver.name }} ({{ driver.team }})</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Add Race</button>
+            <a href="/races" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %} 

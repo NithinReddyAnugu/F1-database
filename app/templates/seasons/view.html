@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}{{ season.year }} F1 Season{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card mb-4">
+        <div class="card-header bg-dark text-white">
+            <h2 class="card-title mb-0">{{ season.year }} Formula 1 Season</h2>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h3>Season Summary</h3>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>Driver Champion:</th>
+                                <td>{{ season.driver_champion }}</td>
+                            </tr>
+                            <tr>
+                                <th>Team Champion:</th>
+                                <td>{{ season.team_champion }}</td>
+                            </tr>
+                            <tr>
+                                <th>Total Races:</th>
+                                <td>{{ season.total_races }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <h3>Notable Events</h3>
+                    <ul class="list-group">
+                        {% for event in season.notable_events %}
+                        <li class="list-group-item">{{ event }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 class="mt-4">Race Calendar</h3>
+            {% if races %}
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Race</th>
+                            <th>Circuit</th>
+                            <th>Date</th>
+                            <th>Winner</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for race in races %}
+                        <tr>
+                            <td>{{ race.name }}</td>
+                            <td>{{ race.circuit }}</td>
+                            <td>{{ race.date_str }}</td>
+                            <td>
+                                {% for result in race.results %}
+                                    {% if result.position == 1 %}
+                                        {{ result.driver }}
+                                        {% if result.fastest_lap %}
+                                            <span class="badge bg-info">FL</span>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <a href="/races/{{ race.id }}" class="btn btn-sm btn-info">Details</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="alert alert-info">
+                <p>No races found for this season.</p>
+            </div>
+            {% endif %}
+        </div>
+        <div class="card-footer">
+            <a href="/seasons" class="btn btn-secondary">Back to Seasons</a>
+            <a href="/seasons/delete/{{ season.id }}" class="btn btn-danger float-end">Delete Season</a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Race - F1 Database{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card border-danger">
+        <div class="card-header bg-danger text-white">
+            <h2 class="mb-0">Delete Race</h2>
+        </div>
+        <div class="card-body">
+            <p class="lead">Are you sure you want to delete the race "{{ race.name }}"?</p>
+            <p>This action cannot be undone.</p>
+            
+            <div class="mt-4">
+                <form method="post" action="/races/delete/{{ race.id }}">
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                        <a href="/races/{{ race.id }}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

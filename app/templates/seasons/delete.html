@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Season{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-danger text-white">
+            <h2 class="card-title mb-0">Delete Season</h2>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-warning">
+                <h4 class="alert-heading">Warning!</h4>
+                <p>Are you sure you want to delete the <strong>{{ season.year }}</strong> F1 Season?</p>
+                <p>This action cannot be undone.</p>
+            </div>
+            
+            <div class="mt-3">
+                <form method="post" action="/seasons/delete/{{ season.id }}">
+                    <button type="submit" class="btn btn-danger">Yes, Delete Season</button>
+                    <a href="/seasons/{{ season.id }}" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}F1 Seasons{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>F1 Seasons</h1>
+        <a href="/seasons/add" class="btn btn-primary">Add Season</a>
+    </div>
+    
+    {% if seasons %}
+    <div class="row">
+        {% for season in seasons %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-dark text-white">
+                    <h3 class="card-title mb-0">{{ season.year }} Season</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Driver Champion:</strong> {{ season.driver_champion }}</p>
+                            <p><strong>Team Champion:</strong> {{ season.team_champion }}</p>
+                            <p><strong>Total Races:</strong> {{ season.total_races }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Notable Events:</strong></p>
+                            <ul>
+                                {% for event in season.notable_events %}
+                                <li>{{ event }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="/seasons/{{ season.id }}" class="btn btn-sm btn-info">View Details</a>
+                    <a href="/seasons/delete/{{ season.id }}" class="btn btn-sm btn-danger float-end">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info">
+        <p>No seasons found. <a href="/seasons/add">Add your first season</a>.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %} 
