@@ -1,13 +1,16 @@
 runtime: python39
-
-entrypoint: uvicorn main:app --host=0.0.0.0 --port=$PORT
+instance_class: F2
+entrypoint: gunicorn -b :$PORT main:app --timeout 300
 
 env_variables:
   PYTHONUNBUFFERED: "TRUE"
+  FIREBASE_CONFIG_FILE: "f1formula-f6f18-firebase-adminsdk-fbsvc-74edc3c8b3.json"
 
 handlers:
 - url: /static
   static_dir: app/static
+  secure: always
 
 - url: /.*
-  script: auto 
+  script: auto
+  secure: always 
