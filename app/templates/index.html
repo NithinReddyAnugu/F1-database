@@ -7,6 +7,24 @@
     <div class="col-md-12 text-center mb-4">
         <h1 class="display-4 f1-red">Welcome to the Formula 1 Database</h1>
         <p class="lead">Explore information about Formula 1 drivers and teams</p>
+        <hr class="my-4">
+    </div>
+</div>
+
+<!-- Hero Banner -->
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card bg-dark text-white">
+            <img src="https://www.formula1.com/content/dam/fom-website/manual/Misc/2021manual/2021BritishManualAdds/GettyImages-1327289211.jpg.transform/9col/image.jpg" class="card-img" alt="F1 Race" style="max-height: 400px; object-fit: cover; opacity: 0.7;">
+            <div class="card-img-overlay d-flex flex-column justify-content-center text-center">
+                <h2 class="card-title display-4 fw-bold" style="text-shadow: 3px 3px 6px rgba(0,0,0,0.8);">Discover Formula 1</h2>
+                <p class="card-text fs-4" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">Everything you need to know about the fastest motorsport in the world</p>
+                <div class="mt-3">
+                    <a href="/drivers" class="btn btn-danger btn-lg me-2"><i class="fas fa-user me-2"></i>Explore Drivers</a>
+                    <a href="/teams" class="btn btn-outline-light btn-lg"><i class="fas fa-users me-2"></i>Explore Teams</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -14,13 +32,18 @@
     <div class="col-md-6 mb-4">
         <div class="card h-100">
             <div class="card-header f1-bg-red">
-                <h3 class="card-title mb-0">Drivers</h3>
+                <h3 class="card-title mb-0"><i class="fas fa-user me-2"></i>Drivers</h3>
             </div>
             <div class="card-body">
                 <p class="card-text">View information about Formula 1 drivers, including their age, race wins, pole positions, and more.</p>
-                <a href="/drivers" class="btn btn-outline-danger">View Drivers</a>
-                <a href="/queries/drivers" class="btn btn-outline-secondary">Query Drivers</a>
-                <a href="/comparisons/drivers" class="btn btn-outline-secondary">Compare Drivers</a>
+                <div class="d-flex flex-wrap mt-4">
+                    <a href="/drivers" class="btn btn-danger main-btn"><i class="fas fa-list me-2"></i>View Drivers</a>
+                    <a href="/queries/drivers" class="btn btn-outline-secondary main-btn"><i class="fas fa-search me-2"></i>Query Drivers</a>
+                    <a href="/comparisons/drivers" class="btn btn-outline-secondary main-btn"><i class="fas fa-chart-bar me-2"></i>Compare Drivers</a>
+                </div>
+            </div>
+            <div class="card-footer bg-light">
+                <small class="text-muted">Explore driver statistics, championships, and career histories</small>
             </div>
         </div>
     </div>
@@ -28,13 +51,18 @@
     <div class="col-md-6 mb-4">
         <div class="card h-100">
             <div class="card-header f1-bg-red">
-                <h3 class="card-title mb-0">Teams</h3>
+                <h3 class="card-title mb-0"><i class="fas fa-users me-2"></i>Teams</h3>
             </div>
             <div class="card-body">
                 <p class="card-text">View information about Formula 1 teams, including their founding year, race wins, constructor titles, and more.</p>
-                <a href="/teams" class="btn btn-outline-danger">View Teams</a>
-                <a href="/queries/teams" class="btn btn-outline-secondary">Query Teams</a>
-                <a href="/comparisons/teams" class="btn btn-outline-secondary">Compare Teams</a>
+                <div class="d-flex flex-wrap mt-4">
+                    <a href="/teams" class="btn btn-danger main-btn"><i class="fas fa-list me-2"></i>View Teams</a>
+                    <a href="/queries/teams" class="btn btn-outline-secondary main-btn"><i class="fas fa-search me-2"></i>Query Teams</a>
+                    <a href="/comparisons/teams" class="btn btn-outline-secondary main-btn"><i class="fas fa-chart-bar me-2"></i>Compare Teams</a>
+                </div>
+            </div>
+            <div class="card-footer bg-light">
+                <small class="text-muted">Discover team achievements, technical innovations, and historical performance</small>
             </div>
         </div>
     </div>
@@ -44,19 +72,79 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header f1-bg-red">
-                <h3 class="card-title mb-0">About This Database</h3>
+                <h3 class="card-title mb-0"><i class="fas fa-info-circle me-2"></i>About This Database</h3>
             </div>
             <div class="card-body">
                 <p>This Formula 1 Database allows you to:</p>
-                <ul>
-                    <li>View detailed information about Formula 1 drivers and teams</li>
-                    <li>Query drivers and teams based on various attributes</li>
-                    <li>Compare two drivers or teams side by side</li>
-                    <li>Add, edit, and delete drivers and teams (requires login)</li>
-                </ul>
-                <p>To add, edit, or delete information, you need to <a href="/login">log in</a> first.</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>View detailed information about Formula 1 drivers and teams</li>
+                            <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Query drivers and teams based on various attributes</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Compare two drivers or teams side by side</li>
+                            <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Add, edit, and delete drivers and teams (requires login)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="alert alert-info mt-4">
+                    <i class="fas fa-user-lock me-2"></i>To add, edit, or delete information, you need to <a href="/login" class="alert-link">log in</a> first.
+                </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Add some animations when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add a subtle animation to the cards
+        const cards = document.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 100 * index);
+        });
+    });
+</script>
+
+<style>
+    .card {
+        opacity: 0.9;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        border: none;
+    }
+    .card-header {
+        border-bottom: none;
+    }
+    .main-btn {
+        transition: all 0.3s ease;
+        margin: 5px;
+    }
+    .main-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .card-img-overlay {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 0.25rem;
+    }
+    /* Special styles for the hero banner */
+    .row.mb-5 .card {
+        border: none;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+    .row.mb-5 .card .card-img {
+        filter: brightness(0.8);
+    }
+</style>
 {% endblock %} 

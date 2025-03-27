@@ -9,11 +9,43 @@ import uvicorn
 
 # Initialize Firebase Admin SDK
 try:
-    cred = credentials.Certificate("f1formula-f6f18-firebase-adminsdk-fbsvc-89d270ff8f.json")
+    # Check for environment variable first
+    firebase_config_file = os.environ.get('FIREBASE_CONFIG_FILE')
+    
+    # Try multiple possible credential file paths
+    potential_credential_files = []
+    
+    # First priority: environment variable if set
+    if firebase_config_file and os.path.exists(firebase_config_file):
+        potential_credential_files.append(firebase_config_file)
+    
+    # Add other possible files
+    potential_credential_files.extend([
+        "f1formula-f6f18-firebase-adminsdk-fbsvc-74edc3c8b3.json",  # Correct file
+        "firebase-credentials.json"  # Generic name
+    ])
+    
+    # Find the first valid credential file
+    cred_path = None
+    for file_path in potential_credential_files:
+        if os.path.exists(file_path):
+            print(f"Found credential file: {file_path}")
+            cred_path = file_path
+            break
+    
+    if not cred_path:
+        raise FileNotFoundError("No valid Firebase credential file found. Please make sure the credential file exists.")
+    
+    # Initialize Firebase
+    cred = credentials.Certificate(cred_path)
     firebase_admin.initialize_app(cred)
+    print("Firebase initialized successfully")
 except ValueError:
     # App already initialized
-    pass
+    print("Firebase app already initialized")
+except Exception as e:
+    print(f"Error initializing Firebase: {str(e)}")
+    raise
 
 # Initialize Firestore client
 db = firestore.client()

@@ -2,7 +2,7 @@ from fastapi import Request, HTTPException, status
 from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
 import firebase_admin.exceptions
-from google.cloud.firestore import NotFound
+from google.cloud.exceptions import NotFound
 
 # Setup templates reference
 templates = Jinja2Templates(directory="app/templates")
